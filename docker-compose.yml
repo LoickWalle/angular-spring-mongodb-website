@@ -1,0 +1,31 @@
+services:
+  mongo:  # Changed from 'mongodb' to 'mongo'
+    image: mongo:latest
+    container_name: mongo  # Update container name to match service name
+    ports:
+      - "27017:27017" # Expose MongoDB port
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mongo_data:/data/db # Volume for MongoDB data persistence
+
+  spring-api:
+    build:
+      context: ./YummyFridgeBack
+      dockerfile: Dockerfile      
+    container_name: spring-api
+    depends_on:
+      - mongo  # Update this to match the new MongoDB service name
+    ports:
+      - "8080:8080" # Expose your Spring Boot app on port 8080
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo  # Update this to match the new MongoDB service name
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_USERNAME: ${DB_USER}
+      SPRING_DATA_MONGODB_PASSWORD: ${DB_PASSWORD}
+      SPRING_DATA_MONGODB_DATABASE: ${DB_NAME} # Name of the MongoDB database
+
+volumes:
+  mongo_data:
+    driver: local
