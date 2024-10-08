@@ -53,6 +53,8 @@
 			<version>2.0.16</version>
 		</dependency>
 
+		<!--Tests dependencies-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -64,8 +66,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo</artifactId>
+			<version>4.7.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

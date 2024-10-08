@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(ApiUrls.ACCOUNT)
+@RequestMapping(ApiUrls.API+ApiUrls.ACCOUNT)
 public class AccountController {
     private final IAccountService iAccountService;
 
@@ -28,12 +28,12 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Account> getAccounts(@PathVariable @NotBlank String id){
-        return new ResponseEntity<>(this.iAccountService.getAccountById(UUID.fromString(id)), HttpStatus.OK);
+        return new ResponseEntity<>(this.iAccountService.getAccountById(UUID.fromString(id)), HttpStatus.FOUND);
     }
 
     @PostMapping
     public ResponseEntity<Account> saveAccount(@Valid @RequestBody Account accountToSave){
-        return new ResponseEntity<>(this.iAccountService.saveAccount(accountToSave), HttpStatus.OK);
+        return new ResponseEntity<>(this.iAccountService.saveAccount(accountToSave), HttpStatus.CREATED);
     }
 
     @DeleteMapping

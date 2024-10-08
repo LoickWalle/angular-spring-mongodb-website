@@ -16,17 +16,23 @@ public class ExceptionHandlerYummyFridge {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionDTO> handleNotFoundException(ConflictException ex){
+    public ResponseEntity<ExceptionDTO> handleNotFoundException(NotFoundException ex){
         ExceptionDTO exceptionDTO = new ExceptionDTO(ex.getMessage(), ex.getStatus().value(), ex.getTime());
 
         return new ResponseEntity<>(exceptionDTO, ex.getStatus());
     }
 
     @ExceptionHandler(WrongParameterException.class)
-    public ResponseEntity<ExceptionDTO> handleWrongParameterException(ConflictException ex){
+    public ResponseEntity<ExceptionDTO> handleWrongParameterException(WrongParameterException ex){
         ExceptionDTO exceptionDTO = new ExceptionDTO(ex.getMessage(), ex.getStatus().value(), ex.getTime());
 
         return new ResponseEntity<>(exceptionDTO, ex.getStatus());
     }
 
+    @ExceptionHandler(NullParameterException.class)
+    public ResponseEntity<ExceptionDTO> handleNullParameterException(NullParameterException ex){
+        ExceptionDTO exceptionDTO = new ExceptionDTO(ex.getMessage(), ex.getStatus().value(), ex.getTime());
+
+        return new ResponseEntity<>(exceptionDTO, ex.getStatus());
+    }
 }
